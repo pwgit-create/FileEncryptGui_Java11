@@ -4,7 +4,7 @@ File Encrypt is an application that encrypts files with RSA/AES from a graphical
 The benefit of using this app is the ease of use while getting the safety of 4096 bits RSA encryption. 
 
 
-![Logo](https://github.com/pwgit-create/FileEncryptGui/blob/main/img/fileEncrypt_small.jpg?raw=true)
+![Logo](https://github.com/pwgit-create/FileEncryptGui/blob/main/img/java_coffe.jpg?raw=true)
 
 ## Java version: 11
 
@@ -58,4 +58,5 @@ There is a plan to split the encrypted files into chunks in the next pull reques
 
 •	The IV-Bytes are generated at random and is written into an encrypted archive 
 
+![Logo](https://github.com/pwgit-create/FileEncryptGui/blob/main/img/fileEncrypt_small.jpg?raw=true)
 
