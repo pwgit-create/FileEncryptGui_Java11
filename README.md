@@ -4,7 +4,7 @@ File Encrypt is an application that encrypts files with RSA/AES from a graphical
 The benefit of using this app is the ease of use while getting the safety of 4096 bits RSA encryption. 
 
 
-![Logo](https://github.com/pwgit-create/FileEncryptGui/blob/main/img/java_coffe.jpg?raw=true)
+![Logo](https://github.com/pwgit-create/FileEncryptGui_Java11/blob/master/FileEncryptGui_U1/src/main/java/pwdev/mongoose/fileencryptgui_u1/img/java_coffe.jpg?raw=true)
 
 ## Java version: 11
 
