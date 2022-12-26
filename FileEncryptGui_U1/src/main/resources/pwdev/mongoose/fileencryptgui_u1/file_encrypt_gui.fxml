@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="400.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: light;"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="pwdev.mongoose.fileencryptgui_u1.MyLaunch">
+
+
+    <children>
+        <ButtonBar fx:id="reg" layoutX="81.0" layoutY="65.0" prefHeight="292.0" prefWidth="830.0">
+            <buttons>
+                <Button fx:id="btnEncrypt" maxWidth="50.0" mnemonicParsing="false" onAction="#Encrypt" style="-fx-background-color: black;" text="Encrypt" textFill="WHITE" />
+                <Button fx:id="btnDecrypt" maxWidth="50.0" mnemonicParsing="false" onAction="#Decrypt" style="-fx-background-color: black;" text="Decrypt" textFill="WHITE" />
+            <Button fx:id="btnNewKeyPair" maxWidth="100.0" mnemonicParsing="false" onAction="#GenerateNewKeyPair" prefHeight="11.0" style="-fx-background-color: black;" text="New Keypair" textFill="WHITE" />
+                <TextArea fx:id="taData" minWidth="800.0" prefHeight="252.0" prefWidth="200.0" />
+            <Button fx:id="btnSetPublicKeyPath" contentDisplay="BOTTOM" maxWidth="150.0" minWidth="63.0" mnemonicParsing="false" onAction="#SetPublicKeyPath" prefHeight="25.0" prefWidth="0.0" style="-fx-background-color: black;" text="Set Public Key Path" textFill="WHITE" />
+            <Button fx:id="btnSetPrivateKeyPath" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#SetPrivateKeyPath" style="-fx-background-color: black;" text="Set Private Key Path" textFill="WHITE" />
+            </buttons>
+        </ButtonBar>
+    </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+
+</AnchorPane>
