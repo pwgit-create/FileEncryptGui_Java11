@@ -44,8 +44,11 @@ The benefit of using this app is the ease of use while getting the safety of 409
 
 ### How to Start the Project? 
 
-> mvn javafx:run
+#### Start with Maven (in pom folder)
+>mvn javafx:run
 
+#### Start with Make script (in root folder)
+>make start
 
 ##  How large files can I encrypt?
 As big as your heap size in java lets you. 
