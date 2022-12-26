@@ -42,9 +42,9 @@ The benefit of using this app is the ease of use while getting the safety of 409
     2. Choose a file that has been encrypted using this app and has the file ending “.zc”. 
     3. If the file has been encrypted with your public key, you can decrypt it with your private key,
 
-### How to Start the Project 
+### How to Start the Project? 
 
-mvn javafx:run
+> mvn javafx:run
 
 
 ##  How large files can I encrypt?
@@ -54,7 +54,7 @@ There is a plan to split the encrypted files into chunks in the next pull reques
 ### What differs this project from the original [FileEncrypt GUI](https://github.com/pwgit-create/FileEncryptGui) Repository?
 •	This repository uses Java 11 while the original repo uses Java 8
 
-•	This Repository uses maven
+•	This repository uses maven
 
 •	The IV-Bytes are generated at random and is written into an encrypted archive 
 
