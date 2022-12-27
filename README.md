@@ -50,16 +50,14 @@ The benefit of using this app is the ease of use while getting the safety of 409
 #### Start with Make script (in root folder)
 >make start
 
-##  How large files can I encrypt?
-As big as your heap size in java lets you. 
-There is a plan to split the encrypted files into chunks in the next pull request which would let you encrypt [GB+] files.
 
 ### What differs this project from the original [FileEncrypt GUI](https://github.com/pwgit-create/FileEncryptGui) Repository?
 •	This repository uses Java 11 while the original repo uses Java 8
 
 •	This repository uses maven
 
-•	The IV-Bytes are generated at random and is written into an encrypted archive 
+•	The IV-Bytes are generated at random and is written into an encrypted archive
 
+•   Buffers are used in the cipher stream operations 
 ![Logo](https://github.com/pwgit-create/FileEncryptGui/blob/main/img/fileEncrypt_small.jpg?raw=true)
 

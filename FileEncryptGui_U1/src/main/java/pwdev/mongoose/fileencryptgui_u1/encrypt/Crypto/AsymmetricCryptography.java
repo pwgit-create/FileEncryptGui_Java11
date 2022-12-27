@@ -16,6 +16,8 @@ public class AsymmetricCryptography extends CryptoBase {
 
     private final String ENCODING = "UTF-8";
 
+    private final int ioStreamBufferSize = 1024 * 16;
+
     public AsymmetricCryptography() throws NoSuchAlgorithmException, NoSuchPaddingException {
     }
 
@@ -82,7 +84,8 @@ public class AsymmetricCryptography extends CryptoBase {
     }
 
 
-    public boolean EncryptFile(final File in, final File out, final SecretKeySpec secretKey,byte[] ivBytes) {
+    public boolean EncryptFile(final File in, final File out, final SecretKeySpec secretKey, byte[] ivBytes) {
+
 
         try {
 
@@ -90,13 +93,15 @@ public class AsymmetricCryptography extends CryptoBase {
 
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(ivBytes));
 
-            FileInputStream is = new FileInputStream(in);
+            BufferedInputStream is = new BufferedInputStream(new FileInputStream(in), ioStreamBufferSize);
             CipherOutputStream os = new CipherOutputStream(new FileOutputStream(out), cipher);
+            BufferedOutputStream osb = new BufferedOutputStream(os, ioStreamBufferSize);
 
-            copy(is, os);
+            copyWithBuffer(is, osb);
 
 
             is.close();
+            osb.close();
             os.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -129,11 +134,12 @@ public class AsymmetricCryptography extends CryptoBase {
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, new IvParameterSpec(ivBytes));
 
             CipherInputStream is = new CipherInputStream(new FileInputStream(in), cipher);
-            FileOutputStream os = new FileOutputStream(out);
+            BufferedInputStream bif = new BufferedInputStream(is, ioStreamBufferSize);
+            BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(out), ioStreamBufferSize);
 
-            copy(is, os);
-
+            copyWithBuffer(bif, os);
             is.close();
+            bif.close();
             os.close();
 
         } catch (IOException ex) {
@@ -156,29 +162,25 @@ public class AsymmetricCryptography extends CryptoBase {
     }
 
 
-
     public SecretKeySpec RetrieveSymmetricKey(PrivateKey privateKey, String encryptedAesKey) {
 
         return DecryptSecretKey(privateKey, encryptedAesKey);
     }
 
 
-
-
     public String RetrieveEncryptedSymmetricKey(PublicKey publicKey, SecretKeySpec secretKeySpec) {
         return EncryptSecretKey(publicKey, secretKeySpec);
     }
 
-    public IvParameterSpec RetrieveIvBytes (PrivateKey privateKey, String encryptedIvBytes) {
+    public IvParameterSpec RetrieveIvBytes(PrivateKey privateKey, String encryptedIvBytes) {
 
         return DecryptIvBytes(privateKey, encryptedIvBytes);
     }
 
 
+    public String RetrieveEncryptedIvBytes(PublicKey publicKey, byte[] ivBytes) {
 
-    public String RetrieveEncryptedIvBytes(PublicKey publicKey,byte[] ivBytes){
-
-        return EncryptIvBytes(publicKey,ivBytes);
+        return EncryptIvBytes(publicKey, ivBytes);
     }
 
     private String EncryptSecretKey(PublicKey pubKey, SecretKeySpec aesKeySpec) {
@@ -239,7 +241,6 @@ public class AsymmetricCryptography extends CryptoBase {
     }
 
 
-
     private void copy(InputStream is, OutputStream os) throws IOException {
         int i;
         final byte[] b = new byte[8192];
@@ -251,5 +252,16 @@ public class AsymmetricCryptography extends CryptoBase {
         is.close();
     }
 
+
+    private void copyWithBuffer(BufferedInputStream is, BufferedOutputStream osb) throws IOException {
+        int i;
+        final byte[] b = new byte[8192];
+        while ((i = is.read(b)) != -1) {
+            osb.write(b, 0, i);
+            osb.flush();
+        }
+        osb.close();
+        is.close();
+    }
 
 }
