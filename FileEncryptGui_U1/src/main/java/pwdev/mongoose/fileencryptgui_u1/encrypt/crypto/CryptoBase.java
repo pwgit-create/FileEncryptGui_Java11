@@ -1,4 +1,4 @@
-package pwdev.mongoose.fileencryptgui_u1.encrypt.Crypto;
+package pwdev.mongoose.fileencryptgui_u1.encrypt.crypto;
 
 public abstract class CryptoBase {
 

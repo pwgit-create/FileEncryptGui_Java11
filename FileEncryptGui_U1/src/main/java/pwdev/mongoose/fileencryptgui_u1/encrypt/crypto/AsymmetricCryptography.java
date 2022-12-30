@@ -1,4 +1,4 @@
-package pwdev.mongoose.fileencryptgui_u1.encrypt.Crypto;
+package pwdev.mongoose.fileencryptgui_u1.encrypt.crypto;
 
 
 import org.apache.commons.codec.binary.Base64;
@@ -26,7 +26,7 @@ public class AsymmetricCryptography extends CryptoBase {
     }
 
 
-    public String EncryptIvBytes(PublicKey pubKey, byte[] ivBytes) {
+    public String encryptIvBytes(PublicKey pubKey, byte[] ivBytes) {
 
         try {
 
@@ -55,7 +55,7 @@ public class AsymmetricCryptography extends CryptoBase {
         return null;
     }
 
-    private IvParameterSpec DecryptIvBytes(PrivateKey privateKey, String cipherText) {
+    private IvParameterSpec decryptIvBytes(PrivateKey privateKey, String cipherText) {
         IvParameterSpec ivParameterSpec = null;
         try {
             final byte[] plainBytes = Base64.decodeBase64(cipherText.getBytes(ENCODING));
@@ -84,7 +84,7 @@ public class AsymmetricCryptography extends CryptoBase {
     }
 
 
-    public boolean EncryptFile(final File in, final File out, final SecretKeySpec secretKey, byte[] ivBytes) {
+    public boolean encryptFile(final File in, final File out, final SecretKeySpec secretKey, byte[] ivBytes) {
 
 
         try {
@@ -124,7 +124,7 @@ public class AsymmetricCryptography extends CryptoBase {
 
     }
 
-    public boolean DecryptFile(final File in, final File out, final SecretKeySpec secretKeySpec,
+    public boolean decryptFile(final File in, final File out, final SecretKeySpec secretKeySpec,
                                byte[] ivBytes) {
 
         try {
@@ -162,28 +162,28 @@ public class AsymmetricCryptography extends CryptoBase {
     }
 
 
-    public SecretKeySpec RetrieveSymmetricKey(PrivateKey privateKey, String encryptedAesKey) {
+    public SecretKeySpec retrieveSymmetricKey(PrivateKey privateKey, String encryptedAesKey) {
 
-        return DecryptSecretKey(privateKey, encryptedAesKey);
+        return decryptSecretKey(privateKey, encryptedAesKey);
     }
 
 
-    public String RetrieveEncryptedSymmetricKey(PublicKey publicKey, SecretKeySpec secretKeySpec) {
-        return EncryptSecretKey(publicKey, secretKeySpec);
+    public String retrieveEncryptedSymmetricKey(PublicKey publicKey, SecretKeySpec secretKeySpec) {
+        return encryptSecretKey(publicKey, secretKeySpec);
     }
 
-    public IvParameterSpec RetrieveIvBytes(PrivateKey privateKey, String encryptedIvBytes) {
+    public IvParameterSpec retrieveIvBytes(PrivateKey privateKey, String encryptedIvBytes) {
 
-        return DecryptIvBytes(privateKey, encryptedIvBytes);
+        return decryptIvBytes(privateKey, encryptedIvBytes);
     }
 
 
-    public String RetrieveEncryptedIvBytes(PublicKey publicKey, byte[] ivBytes) {
+    public String retrieveEncryptedIvBytes(PublicKey publicKey, byte[] ivBytes) {
 
-        return EncryptIvBytes(publicKey, ivBytes);
+        return encryptIvBytes(publicKey, ivBytes);
     }
 
-    private String EncryptSecretKey(PublicKey pubKey, SecretKeySpec aesKeySpec) {
+    private String encryptSecretKey(PublicKey pubKey, SecretKeySpec aesKeySpec) {
 
         try {
 
@@ -212,7 +212,7 @@ public class AsymmetricCryptography extends CryptoBase {
         return null;
     }
 
-    private SecretKeySpec DecryptSecretKey(PrivateKey privateKey, String cipherText) {
+    private SecretKeySpec decryptSecretKey(PrivateKey privateKey, String cipherText) {
         SecretKeySpec aesKeySpec = null;
         try {
             final byte[] plainBytes = Base64.decodeBase64(cipherText.getBytes(ENCODING));
@@ -238,18 +238,6 @@ public class AsymmetricCryptography extends CryptoBase {
             e.printStackTrace();
         }
         return aesKeySpec;
-    }
-
-
-    private void copy(InputStream is, OutputStream os) throws IOException {
-        int i;
-        final byte[] b = new byte[8192];
-        while ((i = is.read(b)) != -1) {
-            os.write(b, 0, i);
-            os.flush();
-        }
-        os.close();
-        is.close();
     }
 
 

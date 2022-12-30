@@ -4,8 +4,8 @@ package pwdev.mongoose.fileencryptgui_u1.encrypt.threads;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import pwdev.mongoose.fileencryptgui_u1.encrypt.Crypto.AppKeyGenerator;
-import pwdev.mongoose.fileencryptgui_u1.encrypt.Crypto.AsymmetricCryptography;
+import pwdev.mongoose.fileencryptgui_u1.encrypt.crypto.AppKeyGenerator;
+import pwdev.mongoose.fileencryptgui_u1.encrypt.crypto.AsymmetricCryptography;
 import pwdev.mongoose.fileencryptgui_u1.encrypt.enum_.SecurityAction;
 import pwdev.mongoose.fileencryptgui_u1.encrypt.util.ArchiveUtil;
 import pwdev.mongoose.fileencryptgui_u1.encrypt.util.FileUtil;
@@ -133,14 +133,14 @@ public class SecurityThread implements Runnable {
 
             byte[] ivBytes = generateIv().getIV();
 
-            SecretKeySpec secretKeySpec = new AppKeyGenerator().GenerateSecretKeySpec();
+            SecretKeySpec secretKeySpec = new AppKeyGenerator().generateSecretKeySpec();
 
 
-            ac.EncryptFile(file, outputFile, secretKeySpec, ivBytes);
+            ac.encryptFile(file, outputFile, secretKeySpec, ivBytes);
 
 
-            String s_ivBytes = ac.RetrieveEncryptedIvBytes(propHandler.getPublicKeyFromSerFile(), ivBytes);
-            String s_secretKeySpec = ac.RetrieveEncryptedSymmetricKey(propHandler.getPublicKeyFromSerFile(), secretKeySpec);
+            String s_ivBytes = ac.retrieveEncryptedIvBytes(propHandler.getPublicKeyFromSerFile(), ivBytes);
+            String s_secretKeySpec = ac.retrieveEncryptedSymmetricKey(propHandler.getPublicKeyFromSerFile(), secretKeySpec);
 
 
             byte[] encSecretKeyArr = s_secretKeySpec.getBytes("UTF-8");
@@ -228,8 +228,8 @@ public class SecurityThread implements Runnable {
             String s_encryptedIvBytes = new String(encryptedIvBytes, ac.ENCODING());
 
 
-            final SecretKeySpec secretKeySpec = ac.RetrieveSymmetricKey(propHandler.getPrivateKeyFromSerFile(), encryptedAesKey);
-            final IvParameterSpec ivBytes = ac.RetrieveIvBytes(propHandler.getPrivateKeyFromSerFile(), s_encryptedIvBytes);
+            final SecretKeySpec secretKeySpec = ac.retrieveSymmetricKey(propHandler.getPrivateKeyFromSerFile(), encryptedAesKey);
+            final IvParameterSpec ivBytes = ac.retrieveIvBytes(propHandler.getPrivateKeyFromSerFile(), s_encryptedIvBytes);
 
             if (secretKeySpec == null) {
 
@@ -241,7 +241,7 @@ public class SecurityThread implements Runnable {
 
             File decryptedOutputFile = FileUtil.RemoveCurrentDirFromPath(decryptedOutputFileTmp);
 
-            ac.DecryptFile(fileToBeDecrypted, decryptedOutputFile, secretKeySpec, ivBytes.getIV());
+            ac.decryptFile(fileToBeDecrypted, decryptedOutputFile, secretKeySpec, ivBytes.getIV());
 
             File outputDir = new File(fileToBeDecrypted.getAbsolutePath());
 

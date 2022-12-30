@@ -1,4 +1,4 @@
-package pwdev.mongoose.fileencryptgui_u1.encrypt.Crypto;
+package pwdev.mongoose.fileencryptgui_u1.encrypt.crypto;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -11,7 +11,7 @@ public class AppKeyGenerator extends CryptoBase {
     public AppKeyGenerator() {
     }
 
-    public SecretKeySpec GenerateSecretKeySpec() throws NoSuchAlgorithmException {
+    public SecretKeySpec generateSecretKeySpec() throws NoSuchAlgorithmException {
 
         final KeyGenerator keyGenerator = KeyGenerator.getInstance(AES);
         keyGenerator.init(AES_KEY_SIZE);
