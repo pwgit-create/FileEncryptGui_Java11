@@ -6,7 +6,8 @@ module pwdev.mongoose.fileencryptgui_u1 {
     requires zip4j;
 
 
-    opens pwdev.mongoose.fileencryptgui_u1 to javafx.fxml;
+
+    opens pwdev.mongoose.fileencryptgui_u1 to javafx.fxml , javafx.graphics;
 
     exports pwdev.mongoose.fileencryptgui_u1;
 }

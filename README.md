@@ -51,13 +51,23 @@ The benefit of using this app is the ease of use while getting the safety of 409
 >make start
 
 
-### What differs this project from the original [FileEncrypt GUI](https://github.com/pwgit-create/FileEncryptGui) Repository?
-•	This repository uses Java 11 while the original repo uses Java 8
+### Security measures taken against enumerating and bruteforce attacks
 
-•	This repository uses maven
+* Hard to enumerate keys since an encrypted file will be copied into a buffer before the cipher operations begins. That means that you must add a 5 GB file into a buffer before the cipher operations begins. That takes time, which is a good thing 😊
+
+
+
+### Project Features
 
 •	The IV-Bytes are generated at random and is written into an encrypted archive
 
 •   Buffers are used in the cipher stream operations 
-![Logo](https://github.com/pwgit-create/FileEncryptGui/blob/main/img/fileEncrypt_small.jpg?raw=true)
+
+•   Graphical User Interface
+
+•   Easy generation of keypair
+
+•   Hard to enumerate keys 
+
+  ![Logo](https://github.com/pwgit-create/FileEncryptGui/blob/main/img/fileEncrypt_small.jpg?raw=true)
 

@@ -229,13 +229,16 @@ public class SecurityThread implements Runnable {
 
 
             final SecretKeySpec secretKeySpec = ac.retrieveSymmetricKey(propHandler.getPrivateKeyFromSerFile(), encryptedAesKey);
-            final IvParameterSpec ivBytes = ac.retrieveIvBytes(propHandler.getPrivateKeyFromSerFile(), s_encryptedIvBytes);
 
             if (secretKeySpec == null) {
 
                 isError = true;
                 endUserMsg = "Decryption Error!";
             }
+
+
+            final IvParameterSpec ivBytes = ac.retrieveIvBytes(propHandler.getPrivateKeyFromSerFile(), s_encryptedIvBytes);
+
 
             File decryptedOutputFileTmp = new File(FileUtil.GetDecryptedOutputFileName(fileToBeDecrypted.getAbsolutePath()));
 
@@ -280,7 +283,7 @@ public class SecurityThread implements Runnable {
         } catch (Exception e) {
 
             isError = true;
-            endUserMsg = "error";
+            endUserMsg = "Decryption error";
 
             e.printStackTrace();
         }

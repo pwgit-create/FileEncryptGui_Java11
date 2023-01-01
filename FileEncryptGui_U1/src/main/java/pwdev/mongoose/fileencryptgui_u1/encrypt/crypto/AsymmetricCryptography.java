@@ -94,14 +94,18 @@ public class AsymmetricCryptography extends CryptoBase {
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(ivBytes));
 
             BufferedInputStream is = new BufferedInputStream(new FileInputStream(in), ioStreamBufferSize);
-            CipherOutputStream os = new CipherOutputStream(new FileOutputStream(out), cipher);
-            BufferedOutputStream osb = new BufferedOutputStream(os, ioStreamBufferSize);
 
-            copyWithBuffer(is, osb);
+            BufferedOutputStream osb = new BufferedOutputStream(new FileOutputStream(out), ioStreamBufferSize);
+            CipherOutputStream os = new CipherOutputStream(osb, cipher);
+
+
+            copyBytes(is, os);
 
 
             is.close();
+            osb.flush();
             osb.close();
+            os.flush();
             os.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -137,9 +141,18 @@ public class AsymmetricCryptography extends CryptoBase {
             BufferedInputStream bif = new BufferedInputStream(is, ioStreamBufferSize);
             BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(out), ioStreamBufferSize);
 
-            copyWithBuffer(bif, os);
+            copyBytes(bif, os);
             is.close();
             bif.close();
+            os.close();
+
+
+            copyBytes(is, os);
+
+            is.close();
+
+            bif.close();
+            os.flush();
             os.close();
 
         } catch (IOException ex) {
@@ -237,18 +250,18 @@ public class AsymmetricCryptography extends CryptoBase {
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         }
-        return aesKeySpec;
+        return null;
     }
 
 
-    private void copyWithBuffer(BufferedInputStream is, BufferedOutputStream osb) throws IOException {
+    private void copyBytes(InputStream is, OutputStream os) throws IOException {
         int i;
         final byte[] b = new byte[8192];
         while ((i = is.read(b)) != -1) {
-            osb.write(b, 0, i);
-            osb.flush();
+            os.write(b, 0, i);
+            os.flush();
         }
-        osb.close();
+        os.close();
         is.close();
     }
 
