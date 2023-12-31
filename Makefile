@@ -4,6 +4,4 @@ compile:
 start:	compile
 	@echo "***Starting FileEncryptGui_U***"
 	cd FileEncryptGui_U1 && mvn javafx:run
-fx:
-	@echo "***Starting FileEncryptGui_U ***"
-	cd FileEncryptGui_U1 && mvn javafx:run
+
