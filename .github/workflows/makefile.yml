@@ -17,6 +17,6 @@ jobs:
         uses: actions/checkout@main
         
       - name: build FileEncryptGUI
-        run: make start
+        run: make compile
         
     
